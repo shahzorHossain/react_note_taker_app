@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./NoteForm.css";
-import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
+import { Button } from "semantic-ui-react";
+import TextareaAutosize from "react-textarea-autosize";
 
 class NoteForm extends Component {
   constructor(props) {
@@ -30,15 +31,23 @@ class NoteForm extends Component {
   render() {
     return (
       <div>
-        <input
-          className="noteInput"
+        {/* className="noteInput"
+           placeholder="Write a note here..."
+           value={this.state.note}
+     onChange={this.handleUserInput}
+         /> */}
+        <TextareaAutosize
           placeholder="Write a note here..."
+          // style={{ height: "300px" }}
+          minRows={20}
+          style={{
+            width: "1500px"
+          }}
           value={this.state.note}
           onChange={this.handleUserInput}
         />
-        <button className="noteButton" onClick={this.handleCLick}>
-          Add Note
-        </button>
+
+        <Button onClick={this.handleCLick}> Add Note </Button>
       </div>
     );
   }

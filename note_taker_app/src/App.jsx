@@ -13,8 +13,16 @@ class App extends Component {
     //we are going to setup React state of our component
     this.state = {
       notes: [
-        { noteContent: "Note 1 here", id: 1 },
-        { noteContent: "Note 2 here", id: 2 }
+        {
+          noteContent:
+            "Hey Nanoleaf! This is my project using React, Node, and MongoDB.",
+          id: 1
+        },
+        {
+          noteContent:
+            "It should be intuitive enough to figure out the commands!",
+          id: 2
+        }
       ]
     };
     this.addNote = this.addNote.bind(this);

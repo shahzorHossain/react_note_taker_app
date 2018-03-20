@@ -23,7 +23,7 @@ class Note extends Component {
         >
           &times;
         </span>
-        <span>Update</span>
+
         <p>{this.noteContent}</p>
       </div>
     );
