@@ -6,18 +6,18 @@ body {
   width: 100%;
   min-height: 100%;
   background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 40, 105, 0.8)),
-    url("./Static/img/3.jpg");
+    url("./Static/img/4.jpg");
   background-attachment: fixed;
   background-size: cover;
 }
-
+/* 
 * {
   height: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: 0;
-}
+} */
 .notesWrapper {
   display: flex;
   flex: 1 1 auto;
@@ -56,4 +56,5 @@ body {
   display: flex;
   flex: 1 1 5%;
   /* background-color: rgba(0, 0, 0, 0.5); */
+  /* align-content: center; */
 }
