@@ -2,8 +2,9 @@
   "name": "note_taker_app",
   "version": "0.1.0",
   "engines": {
-    "node":"8.1.1",
-    "npm":"5.0.3"
+    "node": "8.1.1",
+    "npm": "5.0.3",
+    "yarn": "1.4.0"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +23,8 @@
     "semantic-ui-react": "^0.78.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start":
+      "cross-env NODE_ENV=production MONGO_URL=mongodb://shahzor:BROMANCE211010@ds119489.mlab.com:19489/note_taker_app node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
