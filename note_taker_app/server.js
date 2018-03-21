@@ -12,7 +12,7 @@ var router = express.Router();
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
 
-const PORT = process.env.API_PORT || 8000;
+const PORT = process.env.PORT || 8000;
 //now we should configure the API to use bodyParser and look for
 //JSON data in the request body
 
@@ -120,19 +120,6 @@ router.route("/notes/:note_id").delete(function(req, res) {
   });
 });
 
-// router.route("/notes/remove").delete(function(req, res) {
-//     findByIdAndRemove(req.params.note_id, (err, note) => {
-//     // As always, handle any potential errors:
-//     if (err) return res.status(500).send(err);
-//     // We'll create a simple object to send back with a message and the id of the document that was removed
-//     // You can really do this however you want, though.
-//     const response = {
-//         message: "Todo successfully deleted",
-//         id: todo._id
-//     };
-//     return res.status(200).send(response);
-// });
-// }
 //starts the server and listens for requests
 app.listen(PORT, function() {
   console.log("api running on port " + PORT);

@@ -55,18 +55,19 @@ class App extends Component {
     var url1 = "http://localhost:8000/api/notes/";
     var url = url1.concat(String(key));
 
+    for (var i = id; i < prevNotes.length; i++) {
+      prevNotes[i] = { noteContent: prevNotes[i].noteContent, noteId: i };
+    }
+    prevNotes.splice(id - 1, 1);
+    this.setState({
+      notes: prevNotes
+    });
+
     axios
       .delete(url, { data: { note_id: key } })
       .then(res => {
         console.log(res);
         console.log("Note deleted");
-        for (var i = id; i < prevNotes.length; i++) {
-          prevNotes[i] = { noteContent: prevNotes[i].noteContent, noteId: i };
-        }
-        prevNotes.splice(id - 1, 1);
-        this.setState({
-          notes: prevNotes
-        });
       })
       .catch(err => {
         console.error(err);
@@ -77,11 +78,7 @@ class App extends Component {
     var prevNotes = this.state.notes;
     var url = "http://localhost:8000/api/notes";
     axios.get(url).then(res => {
-      // console.log(res);
-      // console.log("hsshhsshggsgreg");
-
       for (var i = 0; i < res.data.length; i++) {
-        //console.log(res.data[i]["_id"]);
         prevNotes[i] = {
           noteContent: res.data[i].note_content,
           id: res.data[i].note_id

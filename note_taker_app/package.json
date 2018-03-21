@@ -1,6 +1,10 @@
 {
   "name": "note_taker_app",
   "version": "0.1.0",
+  "engines": {
+    "node":"8.1.1",
+    "npm":"5.0.3"
+  },
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
