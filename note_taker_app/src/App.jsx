@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Note from "./components/Note";
 import NoteForm from "./components/NoteForm";
+import axios from "axios";
+
 import { Label, Button } from "semantic-ui-react";
 import NavigationBar from "./components/NavigationBar";
 import "./App.css";
@@ -27,30 +29,83 @@ class App extends Component {
     };
     this.addNote = this.addNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
+    this.loadNotesFromServer = this.loadNotesFromServer.bind(this);
+    this.editNote = this.editNote.bind(this);
   }
 
   addNote(note) {
     var prevNotes = this.state.notes;
-    prevNotes.push({ noteContent: note, id: prevNotes.length + 1 });
-    this.setState({
-      notes: prevNotes
+    var url = "http://localhost:8000/api/notes";
+    axios
+      .post(url, { noteContent: note, noteId: prevNotes.length + 1 })
+      .then(res => {
+        console.log(res);
+        prevNotes.push({ noteContent: note, id: prevNotes.length + 1 });
+        this.setState({
+          notes: prevNotes
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  removeNote(key, id) {
+    var prevNotes = this.state.notes;
+    var url1 = "http://localhost:8000/api/notes/";
+    var url = url1.concat(String(key));
+
+    axios
+      .delete(url, { data: { note_id: key } })
+      .then(res => {
+        console.log(res);
+        console.log("Note deleted");
+        for (var i = id; i < prevNotes.length; i++) {
+          prevNotes[i] = { noteContent: prevNotes[i].noteContent, noteId: i };
+        }
+        prevNotes.splice(id - 1, 1);
+        this.setState({
+          notes: prevNotes
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  loadNotesFromServer() {
+    var prevNotes = this.state.notes;
+    var url = "http://localhost:8000/api/notes";
+    axios.get(url).then(res => {
+      // console.log(res);
+      // console.log("hsshhsshggsgreg");
+
+      for (var i = 0; i < res.data.length; i++) {
+        //console.log(res.data[i]["_id"]);
+        prevNotes[i] = {
+          noteContent: res.data[i].note_content,
+          id: res.data[i].note_id
+        };
+      }
+      this.setState({ notes: prevNotes });
     });
   }
 
-  removeNote(id) {
-    var prevNotes = this.state.notes;
-    for (var i = id; i < prevNotes.length; i++) {
-      //console.log(i);
+  editNote(key, note) {
+    var url = "http://localhost:8000/api/notes/";
+    //var uniqueId = "";
 
-      prevNotes[i] = { noteContent: prevNotes[i].noteContent, noteId: i };
-    }
-    // console.log(prevNotes);
-    prevNotes.splice(id - 1, 1);
-
-    this.setState({
-      notes: prevNotes
+    //sends the comment id and new author/text to our api
+    axios.put("${url}/${key}", note).catch(err => {
+      console.log(err);
     });
-    console.log(prevNotes);
+    this.loadNotesFromServer();
+  }
+
+  componentDidMount() {
+    this.loadNotesFromServer();
+    console.log("did it mount????");
+    setInterval(this.loadNotesFromServer, this.props.pollInterval);
   }
 
   render() {
@@ -59,9 +114,6 @@ class App extends Component {
         <div className="notesWrapper">
           <div className="notesHeader">Welcome to our Note Taking App!</div>
           <div>
-            {/* <Button floated="right" size="large">
-              Sign In
-            </Button> */}
             <NavigationBar />
           </div>
 
@@ -71,8 +123,9 @@ class App extends Component {
                 <Note
                   noteContent={note.noteContent}
                   noteId={note.id}
-                  key={note.id}
+                  //key={note.id}
                   removeNote={this.removeNote}
+                  editNote={this.editNote}
                 />
               );
             })}

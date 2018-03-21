@@ -11,6 +11,7 @@
   border-radius: 3px;
   box-shadow: 43x 3px 2px #333;
   opacity: 1;
+  word-wrap: break-word;
 }
 
 @keyframes fadeIn {
@@ -53,5 +54,14 @@
 }
 
 .closebtn:hover {
+  color: #ac2500;
+}
+.editbtn {
+  color: #aa9;
+  float: right;
+  font-size: 1.3em;
+}
+
+.editbtn:hover {
   color: #ac2500;
 }

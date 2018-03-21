@@ -28,9 +28,6 @@ export default class NavigationBar extends Component {
 
     return (
       <Menu secondary color="yellow" size="massive">
-        <Menu.Item>
-          <Input icon="search" placeholder="Search..." />
-        </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item
             name={this.state.login}

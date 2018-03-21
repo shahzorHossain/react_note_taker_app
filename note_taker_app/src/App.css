@@ -50,6 +50,7 @@ body {
   align-items: flex-start;
   align-content: flex-start;
   overflow: auto;
+  word-wrap: break-word;
 }
 
 .notesFooter {

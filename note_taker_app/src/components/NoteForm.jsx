@@ -12,7 +12,18 @@ class NoteForm extends Component {
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleCLick = this.handleCLick.bind(this);
+    // this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
+    // this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
+
+  // handleNoteSubmit() {
+  //   //add POST code
+  // }
+
+  // componentDidMount() {
+  //   this.loadCommentsFromServer();
+  //   setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+  // }
 
   handleUserInput(e) {
     this.setState({
@@ -22,7 +33,6 @@ class NoteForm extends Component {
 
   handleCLick() {
     this.props.addNote(this.state.note);
-
     this.setState({
       note: ""
     });
@@ -31,14 +41,8 @@ class NoteForm extends Component {
   render() {
     return (
       <div>
-        {/* className="noteInput"
-           placeholder="Write a note here..."
-           value={this.state.note}
-     onChange={this.handleUserInput}
-         /> */}
         <TextareaAutosize
           placeholder="Write a note here..."
-          // style={{ height: "300px" }}
           minRows={20}
           style={{
             width: "1500px"
