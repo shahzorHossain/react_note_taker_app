@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 8000;
 //JSON data in the request body
 
 //db config
+
 mongoose.connect(keys.mongoURI);
 
 app.use(bodyParser.urlencoded({ extended: true }));
